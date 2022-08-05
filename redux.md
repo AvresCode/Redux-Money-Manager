@@ -93,3 +93,29 @@
 
 check yourself! 
  Each time we click on the Deposit 10$ button now, we should not only see our action being dispatched, but also an update to the Redux state - both in the "State" tab but also in the "Diff" tab.
+
+//*** Selector: Get data from the store
+
+1.Create our selector function
+
+    // src/store/balance/selectors.js
+    export const selectBalance = (reduxState) => reduxState.balance.amount;
+
+2.Use the selector in a component:
+    in App.js:
+    remove import useState and useDispatch
+     import { selectBalance } from "./store/balance/selectors";
+     import { useDispatch, useSelector } from "react-redux";
+
+    remove const [balance, setBalance] = useState(0); 
+    add const balance = useSelector(selectBalance);
+    
+    Remove setBalance(balance + 10);
+
+    Now balance will be updated every time the computed value of our selector changes. 
+
+    We will need useState for data that concerns our UI Logic / Data rather than our Business Logic / Data.
+
+
+    check yourself! Not only do we see our actions and state updates in the devtools, but now we can leverage one of Redux's cool features: time travel.
+    Open the devtools and click on the white arrows in the bottom right corner. 
