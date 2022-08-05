@@ -50,4 +50,26 @@ Dispatch Action: Sending data to the store:
        deposit: (state) => {
       // empty for now! :)
      },
+      or// deposit: (state, action) => {
+      console.log("Hello from the reducer!");
+    },
+
+     export const {deposit} = balanceSlice.actions;
+
+
+2&3. Import useDispatch and dispatch the action
+    in app.js
+    import { useDispatch } from "react-redux";
+    import { deposit } from "./store/balance/slice"
+
+    add const dispatch = useDispatch() to the function App:
+    function App() {
+   const dispatch = useDispatch();
   
+    add dispatch(deposit(10)); after setBalance
+            onClick={() => {
+         setBalance(balance + 10);
+         dispatch(deposit(10));
+        }}
+
+    check yourself in redux devTool:when you click action will be dispatched
