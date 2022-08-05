@@ -1,7 +1,7 @@
  npx create-react-app money-manager
  create a simple function in app.js 
 
- Redux steps:
+//***Redux steps:
  1.yarn add @reduxjs/toolkit react-redux
  2.Creating a Redux store in src/store/index.js
   import { configureStore } from "@reduxjs/toolkit";
@@ -42,7 +42,7 @@
  Run the app again to check if it's working: npm start
  check the store and action in Redux devTool 
 
-Dispatch Action: Sending data to the store:
+//***Dispatch Action: Sending data to the store:
 
 1.Define a key in our newly created slice
    src/store/balance/slice.js, in reducer add a key called `deposit`
@@ -50,15 +50,12 @@ Dispatch Action: Sending data to the store:
        deposit: (state) => {
       // empty for now! :)
      },
-      or// deposit: (state, action) => {
-      console.log("Hello from the reducer!");
-    },
-
+   
      export const {deposit} = balanceSlice.actions;
 
 
 2&3. Import useDispatch and dispatch the action
-    in app.js
+    in app.js or any component with main codes
     import { useDispatch } from "react-redux";
     import { deposit } from "./store/balance/slice"
 
@@ -73,3 +70,26 @@ Dispatch Action: Sending data to the store:
         }}
 
     check yourself in redux devTool:when you click action will be dispatched
+
+//***Reducer: Intercept action and update the redux state
+
+1.Add a console.log() inside the key in our reducer to test if everything is wired      correctly, src/store/balance/slice.js:
+      deposit: (state) => {
+      console.log("Hello from the reducer!")
+    },
+   check in the devTool if you can get the console message
+
+
+2.Add a logic to update the state: state.amount = state.amount + action.payload
+    src/store/balance/slice.js:
+    reducers: {
+        deposit: (state, action) => {
+         console.log("Hello from the reducer!")
+         ** state.amount = state.amount + action.payload
+        },
+ The payload of our actions is the value (or array, or object) we pass in when dispatching an action: // in this case, in our reducer, action.payload === 10
+  dispatch(deposit(10)); 
+
+
+check yourself! 
+ Each time we click on the Deposit 10$ button now, we should not only see our action being dispatched, but also an update to the Redux state - both in the "State" tab but also in the "Diff" tab.

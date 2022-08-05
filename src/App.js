@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { deposit } from "./store/balance/slice"
 
 function App() {
-  const [balance, setBalance] = useState(0);
   const dispatch = useDispatch();
+  const [balance, setBalance] = useState(0);
+
 
   return (
     <div className="App">
