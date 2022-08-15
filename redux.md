@@ -42,6 +42,8 @@
  Run the app again to check if it's working: npm start
  check the store and action in Redux devTool 
 
+ //**if we make compponents and return in app.js at this stage , then we do the selectors first to see the data in our app, then we return to the dispatch action
+
 //***Dispatch Action: Sending data to the store:
 
 1.Define a key in our newly created slice
@@ -63,9 +65,9 @@
     function App() {
    const dispatch = useDispatch();
   
-    add dispatch(deposit(10)); after setBalance
+    add dispatch(deposit(10)); after/in place of setBalance
             onClick={() => {
-         setBalance(balance + 10);
+        // setBalance(balance + 10);
          dispatch(deposit(10));
         }}
 
@@ -73,7 +75,7 @@
 
 //***Reducer: Intercept action and update the redux state
 
-1.Add a console.log() inside the key in our reducer to test if everything is wired      correctly, src/store/balance/slice.js:
+1.Add a console.log() inside the key in our reducer to test if everything is wired correctly, src/store/balance/slice.js:
       deposit: (state) => {
       console.log("Hello from the reducer!")
     },
@@ -102,7 +104,7 @@ check yourself!
     export const selectBalance = (reduxState) => reduxState.balance.amount;
 
 2.Use the selector in a component:
-    in App.js:
+    in App.js / or component file:
     remove import useState and useDispatch
      import { selectBalance } from "./store/balance/selectors";
      import { useDispatch, useSelector } from "react-redux";
