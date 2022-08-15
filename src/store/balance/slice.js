@@ -8,9 +8,9 @@ export const balanceSlice = createSlice({
   name: "balance",
   initialState,
   reducers: {
-    deposit: (state) => {
+    deposit: (state, action) => {
         console.log("Hello from the reducer!");
-        state.amount = state.amount + 10
+        state.amount = state.amount + action.payload
       },
       withdraw: (state, action) => {
         state.amount = state.amount - action.payload
@@ -18,6 +18,7 @@ export const balanceSlice = createSlice({
     reset: (state) => {
         state.amount= initialState.amount
     },
+   
   },
 });
 
